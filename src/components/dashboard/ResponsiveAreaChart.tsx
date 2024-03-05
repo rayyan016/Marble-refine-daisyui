@@ -1,17 +1,13 @@
-import React from "react";
 import {
   ResponsiveContainer,
-  AreaChart,
   CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,
-  Area,
   Line,
   LineChart,
   Legend,
 } from "recharts";
-import { ChartTooltip } from "../../components/dashboard/ChartTooltip";
 import { IChartDatum } from "../../interfaces";
 
 type TResponsiveAreaChartProps = {
@@ -40,19 +36,21 @@ export const ResponsiveAreaChart = ({
         <XAxis dataKey="name" />
         <YAxis />
         <Tooltip />
-        <Legend />
+        <Legend align="right" iconType="plainline" />
         <Line
+          name="Second Line"
+          type="monotone"
+          dataKey="value"
+          stroke={colors?.stroke}
+          dot={false}
+        />
+        <Line
+          name="First Line"
           type="monotone"
           dataKey="value"
           stroke={colors?.stroke}
           dot={false}
           strokeDasharray="4 1 2"
-        />
-        <Line
-          type="monotone"
-          dataKey="value"
-          stroke={colors?.stroke}
-          dot={false}
         />
       </LineChart>
     </ResponsiveContainer>
