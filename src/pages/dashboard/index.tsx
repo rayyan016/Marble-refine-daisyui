@@ -108,10 +108,19 @@ export const Dashboard: React.FC = () => {
           dailyOrders={dailyOrders}
           newCustomers={newCustomers}
         />
-        <button onClick={() => setIsTabOpen(!isTabOpen)}>
-          {isTabOpen ? <ChevronDownIcon className="w-8" /> : <ChevronUpIcon className="w-8" />}
-        </button>
-        {isTabOpen && <TabView tabs={tabs} />}
+        <div className="mx-auto py-4 bg-slate-50 border rounded-lg drop-shadow-md">
+          <div className="flex justify-between px-4">
+            <div>Hello</div>
+            <button className="-mt-4" onClick={() => setIsTabOpen(!isTabOpen)}>
+              {isTabOpen ? (
+                <ChevronDownIcon className="w-8" />
+              ) : (
+                <ChevronUpIcon className="w-8" />
+              )}
+            </button>
+          </div>
+          {isTabOpen && <TabView tabs={tabs} />}
+        </div>
         <RecentSales />
       </>
     </>
