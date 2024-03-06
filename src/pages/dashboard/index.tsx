@@ -8,6 +8,7 @@ import { ResponsiveBarChart } from "../../components/dashboard/ResponsiveBarChar
 import { TabView } from "../../components/dashboard/TabView";
 import { RecentSales } from "../../components/dashboard/RecentSales";
 import { IChartDatum, TTab } from "../../interfaces";
+import GraphCard from "../../components/dashboard/GraphCard";
 
 const filters: CrudFilter[] = [
   {
@@ -110,7 +111,10 @@ export const Dashboard: React.FC = () => {
         />
         <div className="mx-auto py-4 bg-slate-50 border rounded-lg drop-shadow-md">
           <div className="flex justify-between px-4">
-            <div>Hello</div>
+            <div><GraphCard text="Online Store Sessions" number={255581} /></div>
+            <div><GraphCard text="Net Return Value" number={1507.44} /></div>
+            <div><GraphCard text="Total Orders" number={10511} /></div>
+            <div><GraphCard text="Conversion Rate" number={3.18} /></div>
             <button className="-mt-4" onClick={() => setIsTabOpen(!isTabOpen)}>
               {isTabOpen ? (
                 <ChevronDownIcon className="w-8" />
