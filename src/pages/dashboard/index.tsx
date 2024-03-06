@@ -1,12 +1,14 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { CrudFilter, useList } from "@refinedev/core";
 import dayjs from "dayjs";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
 import Stats from "../../components/dashboard/Stats";
 import { ResponsiveAreaChart } from "../../components/dashboard/ResponsiveAreaChart";
 import { ResponsiveBarChart } from "../../components/dashboard/ResponsiveBarChart";
 import { TabView } from "../../components/dashboard/TabView";
 import { RecentSales } from "../../components/dashboard/RecentSales";
 import { IChartDatum, TTab } from "../../interfaces";
+import GraphCard from "../../components/dashboard/GraphCard";
 
 const filters: CrudFilter[] = [
   {
@@ -98,16 +100,33 @@ export const Dashboard: React.FC = () => {
       ),
     },
   ];
-
+  const [isTabOpen, setIsTabOpen] = useState(true); // Initial state: tab is open
   return (
     <>
-      <Stats
-        dailyRevenue={dailyRevenue}
-        dailyOrders={dailyOrders}
-        newCustomers={newCustomers}
-      />
-      <TabView tabs={tabs} />
-      <RecentSales />
+      <>
+        <Stats
+          dailyRevenue={dailyRevenue}
+          dailyOrders={dailyOrders}
+          newCustomers={newCustomers}
+        />
+        <div className="mx-auto py-4 bg-slate-50 border rounded-lg drop-shadow-md">
+          <div className="flex justify-between px-4">
+            <div><GraphCard text="Online Store Sessions" number={255581} /></div>
+            <div><GraphCard text="Net Return Value" number={1507.44} /></div>
+            <div><GraphCard text="Total Orders" number={10511} /></div>
+            <div><GraphCard text="Conversion Rate" number={3.18} /></div>
+            <button className="-mt-4" onClick={() => setIsTabOpen(!isTabOpen)}>
+              {isTabOpen ? (
+                <ChevronDownIcon className="w-8" />
+              ) : (
+                <ChevronUpIcon className="w-8" />
+              )}
+            </button>
+          </div>
+          {isTabOpen && <TabView tabs={tabs} />}
+        </div>
+        <RecentSales />
+      </>
     </>
   );
 };

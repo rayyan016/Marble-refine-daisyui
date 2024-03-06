@@ -1,14 +1,13 @@
-import React from "react";
 import {
   ResponsiveContainer,
-  AreaChart,
   CartesianGrid,
   XAxis,
   YAxis,
   Tooltip,
-  Area,
+  Line,
+  LineChart,
+  Legend,
 } from "recharts";
-import { ChartTooltip } from "../../components/dashboard/ChartTooltip";
 import { IChartDatum } from "../../interfaces";
 
 type TResponsiveAreaChartProps = {
@@ -27,56 +26,33 @@ export const ResponsiveAreaChart = ({
 }: TResponsiveAreaChartProps) => {
   return (
     <ResponsiveContainer height={400}>
-      <AreaChart
+      <LineChart
+        width={730}
+        height={250}
         data={data}
-        height={400}
-        margin={{
-          top: 10,
-          right: 30,
-          left: 0,
-          bottom: 0,
-        }}
+        margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
       >
-        <CartesianGrid strokeDasharray="0 0 0" />
-        <XAxis
-          dataKey="date"
-          tickCount={data?.length ?? 0}
-          tick={{
-            stroke: "light-grey",
-            strokeWidth: 0.5,
-            fontSize: "12px",
-          }}
-        />
-        <YAxis
-          tickCount={13}
-          tick={{
-            stroke: "light-grey",
-            strokeWidth: 0.5,
-            fontSize: "12px",
-          }}
-          interval="preserveStartEnd"
-          domain={[0, "dataMax + 10"]}
-        />
-        <Tooltip
-          content={<ChartTooltip kpi={kpi} colors={colors} />}
-          wrapperStyle={{
-            backgroundColor: "rgba(0, 0, 0, 0.7)",
-            border: "0 solid #000",
-            borderRadius: "10px",
-          }}
-        />
-        <Area
+        <CartesianGrid strokeDasharray="3 3" />
+        <XAxis dataKey="name" />
+        <YAxis />
+        <Tooltip />
+        <Legend align="right" iconType="plainline" />
+        <Line
+          name="Second Line"
           type="monotone"
           dataKey="value"
-          stroke={colors?.stroke}
-          strokeWidth={3}
-          fill={colors?.fill}
-          dot={{
-            stroke: colors?.stroke,
-            strokeWidth: 3,
-          }}
+          stroke="#489AD2"
+          dot={false}
         />
-      </AreaChart>
+        <Line
+          name="First Line"
+          type="monotone"
+          dataKey={(dataPoint) => dataPoint.value * Math.floor((Math.random()*2))}
+          stroke={colors?.stroke}
+          dot={false}
+          strokeDasharray="4 1 2"
+        />
+      </LineChart>
     </ResponsiveContainer>
   );
 };
