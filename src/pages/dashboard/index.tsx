@@ -1,6 +1,7 @@
 import React, { useMemo, useState } from "react";
 import { CrudFilter, useList } from "@refinedev/core";
 import dayjs from "dayjs";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
 import Stats from "../../components/dashboard/Stats";
 import { ResponsiveAreaChart } from "../../components/dashboard/ResponsiveAreaChart";
 import { ResponsiveBarChart } from "../../components/dashboard/ResponsiveBarChart";
@@ -108,7 +109,7 @@ export const Dashboard: React.FC = () => {
           newCustomers={newCustomers}
         />
         <button onClick={() => setIsTabOpen(!isTabOpen)}>
-          {isTabOpen ? "Hide Tabs" : "Show Tabs"}
+          {isTabOpen ? <ChevronDownIcon className="w-8" /> : <ChevronUpIcon className="w-8" />}
         </button>
         {isTabOpen && <TabView tabs={tabs} />}
         <RecentSales />
