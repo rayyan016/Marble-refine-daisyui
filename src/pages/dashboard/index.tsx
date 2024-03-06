@@ -1,4 +1,4 @@
-import React, { useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import { CrudFilter, useList } from "@refinedev/core";
 import dayjs from "dayjs";
 import Stats from "../../components/dashboard/Stats";
@@ -98,16 +98,21 @@ export const Dashboard: React.FC = () => {
       ),
     },
   ];
-
+  const [isTabOpen, setIsTabOpen] = useState(true); // Initial state: tab is open
   return (
     <>
-      <Stats
-        dailyRevenue={dailyRevenue}
-        dailyOrders={dailyOrders}
-        newCustomers={newCustomers}
-      />
-      <TabView tabs={tabs} />
-      <RecentSales />
+      <>
+        <Stats
+          dailyRevenue={dailyRevenue}
+          dailyOrders={dailyOrders}
+          newCustomers={newCustomers}
+        />
+        <button onClick={() => setIsTabOpen(!isTabOpen)}>
+          {isTabOpen ? "Hide Tabs" : "Show Tabs"}
+        </button>
+        {isTabOpen && <TabView tabs={tabs} />}
+        <RecentSales />
+      </>
     </>
   );
 };
