@@ -41,13 +41,13 @@ export const ResponsiveAreaChart = ({
           name="Second Line"
           type="monotone"
           dataKey="value"
-          stroke={colors?.stroke}
+          stroke="#489AD2"
           dot={false}
         />
         <Line
           name="First Line"
           type="monotone"
-          dataKey="value"
+          dataKey={(dataPoint) => dataPoint.value * Math.floor((Math.random()*2))}
           stroke={colors?.stroke}
           dot={false}
           strokeDasharray="4 1 2"
