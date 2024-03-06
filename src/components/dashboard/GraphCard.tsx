@@ -20,7 +20,7 @@ const GraphCard: React.FC<CardProps> = ({ text, number }) => {
           {text}
         </span>
         <button type="button" onClick={handlePencilClick}>
-          <PencilIcon className="h-5 w-5 text-gray-500 hover:text-gray-700" />
+          <PencilIcon className="h-5 w-5 ml-12 text-gray-500 hover:text-gray-700" />
         </button>
       </div>
       <span className="text-lg font-medium mr-auto mt-2 flex">
