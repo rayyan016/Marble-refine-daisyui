@@ -38,14 +38,14 @@ export const ResponsiveAreaChart = ({
         <Tooltip />
         <Legend align="right" iconType="plainline" />
         <Line
-          name={`${data[0].date} - ${data[data.length - 1].date}`}
+          name={`${data?.[0]?.date} - ${data?.[data.length - 1]?.date}`}
           type="monotone"
           dataKey="value"
           stroke="#489AD2"
           dot={false}
         />
         <Line
-          name={`${data[0].date} - ${data[data.length - 1].date}`}
+          name={`${data?.[0]?.date} - ${data?.[data.length - 1]?.date}`}
           type="monotone"
           dataKey={(dataPoint) => dataPoint.value * Math.floor((Math.random()*2))}
           stroke={colors?.stroke}
