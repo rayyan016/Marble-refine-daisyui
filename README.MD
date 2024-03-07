@@ -52,3 +52,9 @@ Created a card component to display the cards above the graph as per the figma d
 ### List Item Component:
 
 - Upon clicking the pencil icon inside the card component, a list of itm is displayed. The list item component is created to display the list of items.
+
+## Screenshots  
+
+![alt text](image.png)
+
+![alt text](image-1.png)
