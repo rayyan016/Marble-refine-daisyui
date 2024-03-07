@@ -1,6 +1,8 @@
 import React, { useMemo, useState } from "react";
 import { CrudFilter, useList } from "@refinedev/core";
 import dayjs from "dayjs";
+import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/20/solid";
 import Stats from "../../components/dashboard/Stats";
 import { ResponsiveAreaChart } from "../../components/dashboard/ResponsiveAreaChart";
@@ -10,20 +12,33 @@ import { RecentSales } from "../../components/dashboard/RecentSales";
 import { IChartDatum, TTab } from "../../interfaces";
 import GraphCard from "../../components/dashboard/GraphCard";
 
-const filters: CrudFilter[] = [
-  {
-    field: "start",
-    operator: "eq",
-    value: dayjs()?.subtract(7, "days")?.startOf("day"),
-  },
-  {
-    field: "end",
-    operator: "eq",
-    value: dayjs().startOf("day"),
-  },
-];
+import "@wojtekmaj/react-daterange-picker/dist/DateRangePicker.css";
+import "react-calendar/dist/Calendar.css";
+
+const filters: CrudFilter[] = [];
 
 export const Dashboard: React.FC = () => {
+  const [startDate, setStartDate] = useState(
+    dayjs().subtract(12, "days").startOf("day")
+  );
+  const [endDate, setEndDate] = useState(dayjs().startOf("day"));
+
+  const handleDateChange = (ranges: any) => {
+    setStartDate(dayjs(ranges[0]).startOf("day"));
+    setEndDate(dayjs(ranges[1]).startOf("day"));
+  };
+
+  filters[0] = {
+    field: "start",
+    operator: "eq",
+    value: startDate.format("YYYY-MM-DD"),
+  };
+  filters[1] = {
+    field: "end",
+    operator: "eq",
+    value: endDate.format("YYYY-MM-DD"),
+  };
+
   const { data: dailyRevenue } = useList<IChartDatum>({
     resource: "dailyRevenue",
     filters,
@@ -111,10 +126,18 @@ export const Dashboard: React.FC = () => {
         />
         <div className="mx-auto py-4 bg-slate-50 border rounded-lg drop-shadow-md">
           <div className="flex justify-between px-4">
-            <div><GraphCard text="Online Store Sessions" number={255581} /></div>
-            <div><GraphCard text="Net Return Value" number={1507.44} /></div>
-            <div><GraphCard text="Total Orders" number={10511} /></div>
-            <div><GraphCard text="Conversion Rate" number={3.18} /></div>
+            <div>
+              <GraphCard text="Online Store Sessions" number={255581} />
+            </div>
+            <div>
+              <GraphCard text="Net Return Value" number={1507.44} />
+            </div>
+            <div>
+              <GraphCard text="Total Orders" number={10511} />
+            </div>
+            <div>
+              <GraphCard text="Conversion Rate" number={3.18} />
+            </div>
             <button className="-mt-4" onClick={() => setIsTabOpen(!isTabOpen)}>
               {isTabOpen ? (
                 <ChevronDownIcon className="w-8" />
@@ -122,6 +145,10 @@ export const Dashboard: React.FC = () => {
                 <ChevronUpIcon className="w-8" />
               )}
             </button>
+            <DateRangePicker
+              onChange={handleDateChange}
+              value={[startDate.toDate(), endDate.toDate()]}
+            />
           </div>
           {isTabOpen && <TabView tabs={tabs} />}
         </div>
