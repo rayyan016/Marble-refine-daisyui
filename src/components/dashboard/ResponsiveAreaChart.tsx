@@ -36,7 +36,7 @@ export const ResponsiveAreaChart = ({
         <XAxis dataKey="date" />
         <YAxis />
         <Tooltip />
-        <Legend align="right" iconType="plainline" />
+        <Legend align="right" iconType="plainline" wrapperStyle={{marginBottom: -20}}/>
         <Line
           name={`${data?.[0]?.date} - ${data?.[data.length - 1]?.date}`}
           type="monotone"
