@@ -145,6 +145,8 @@ export const Dashboard: React.FC = () => {
                 <ChevronUpIcon className="w-8" />
               )}
             </button>
+          </div>
+          <div className="flex justify-end mt-6 mr-4">
             <DateRangePicker
               onChange={handleDateChange}
               value={[startDate.toDate(), endDate.toDate()]}
